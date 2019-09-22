@@ -30,7 +30,7 @@ public class FieldFrameBuilder extends JFrame implements FieldFrameBuilderRole, 
         this.rows = rows;
         this.columns = columns;
         setTitle("RabbitsGame");
-        setBounds(650, 200, 1000, 400);
+        setSize(1000, 400);
         cell = new ParcelFrameRole[rows + 2][columns + 2];
         JPanel panel = new JPanel(new GridLayout(rows + 2, columns + 2));
         panel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -86,6 +86,7 @@ public class FieldFrameBuilder extends JFrame implements FieldFrameBuilderRole, 
         split.setDividerLocation(500);
         add(split);
 
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
