@@ -1,10 +1,10 @@
 package controller;
 
-import gui.FieldFrameBuilder;
-import gui.StartGameFrame;
 import game.Game;
 import game.GameFactory;
 import game.GameFactoryRole;
+import gui.FieldFrameBuilder;
+import gui.StartGameFrame;
 import io.Output;
 import io.OutputRole;
 import player.EnemyRole;
@@ -61,7 +61,6 @@ public class Controller implements Serializable {
         gameFactory.addPlayer(x, y);
         fieldFrame.addPlayerInGUI(x, y, gameFactory.getPlayerColor(), gameFactory.getPlayerIndex());
         addPlayerInfoInTable(gameFactory.getPlayer());
-
     }
 
     public void startGame() {
@@ -147,9 +146,10 @@ public class Controller implements Serializable {
 
     private void addPlayerInfoInTable(PlayerRole player) {
         ArrayList<String> playerInfo = new ArrayList<>();
-        playerInfo.add(String.valueOf(player.getIndex()));
-        String score = String.valueOf(player.getScore());
-        playerInfo.add(score);
+        int index = player.getIndex();
+        playerInfo.add(String.valueOf(index));
+        int score = player.getScore();
+        playerInfo.add(String.valueOf(score));
         String status = player.getStatus();
         playerInfo.add(status);
         int noOfLifes = player.getNumberOfLifes();
@@ -157,7 +157,6 @@ public class Controller implements Serializable {
         int healthPoints = player.getHealthPoints();
         playerInfo.add(String.valueOf(healthPoints));
         fieldFrame.updatePlayerInfoTable(playerInfo.toArray());
-
     }
 
     public void addRandomPrize(int x, int y) {
@@ -176,12 +175,9 @@ public class Controller implements Serializable {
         OutputRole output = new Output();
         GameFactoryRole gameFactory = new GameFactory(output);
         Controller controller = new Controller(gameFactory);
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                StartGameFrame window = new StartGameFrame(controller);
-                window.setVisible(true);
-            }
+        EventQueue.invokeLater(() -> {
+            StartGameFrame window = new StartGameFrame(controller);
+            window.setVisible(true);
         });
     }
 }

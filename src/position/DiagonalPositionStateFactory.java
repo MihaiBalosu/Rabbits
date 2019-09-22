@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class DiagonalPositionStateFactory implements PositionStateFactoryRole {
 
+    private MovementStateFactoryRole movementFactory;
     private PositionStateRole principalDiagonalUpDown;
     private PositionStateRole principalDiagonalDownUp;
     private PositionStateRole secondaryDiagonalUpDown;
@@ -15,13 +16,16 @@ public class DiagonalPositionStateFactory implements PositionStateFactoryRole {
 
         rabbitPosition = new DynamicPosition(x, y);
         rabbitPosition.setDimensions(rows, columns);
-
-        this.principalDiagonalUpDown = new MovementPrincipalDiagonalUpDown(rabbitPosition);
-        this.principalDiagonalDownUp = new MovementPrincipalDiagonalDownUp(rabbitPosition);
-        this.secondaryDiagonalUpDown = new MovementSecondaryDiagonalUpDown(rabbitPosition);
-        this.secondaryDiagonalDownUp = new MovementSecondaryDiagonalDownUp(rabbitPosition);
-
+        buildMovements();
         setNextPositionState();
+    }
+
+    private void buildMovements() {
+        movementFactory = new MovementStateFactory(rabbitPosition);
+        this.principalDiagonalUpDown = movementFactory.buildMovementToSW();
+        this.principalDiagonalDownUp = movementFactory.buildMovementToNE();
+        this.secondaryDiagonalUpDown = movementFactory.buildMovementToSE();
+        this.secondaryDiagonalDownUp = movementFactory.buildMovementToNW();
     }
 
     private void setNextPositionState() {

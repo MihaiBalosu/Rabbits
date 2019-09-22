@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class PositionStateFactory implements PositionStateFactoryRole, Serializable {
 
+    private MovementStateFactoryRole movementFactory;
     private PositionStateRole northState;
     private PositionStateRole southState;
     private PositionStateRole estState;
@@ -16,19 +17,16 @@ public class PositionStateFactory implements PositionStateFactoryRole, Serializa
 
         rabbitPosition = new DynamicPosition(x, y);
         rabbitPosition.setDimensions(rows, columns);
-
-
-        MovementStateFactoryRole northStateFactory = new MovementNorthToSouthFactory(rabbitPosition);
-        MovementStateFactoryRole southStateFactory = new MovementSouthToNorthFactory(rabbitPosition);
-        MovementStateFactoryRole estStateFactory = new MovementEstToWestFactory(rabbitPosition);
-        MovementStateFactoryRole westStateFactory = new MovementWestToEstFactory(rabbitPosition);
-
-        this.northState = northStateFactory.build();
-        this.southState = southStateFactory.build();
-        this.estState = estStateFactory.build();
-        this.westState = westStateFactory.build();
-
+        buildMovements();
         setNextPositionState();
+    }
+
+    private void buildMovements() {
+        movementFactory = new MovementStateFactory(rabbitPosition);
+        this.northState = movementFactory.buildMovementNorthToSouth();
+        this.southState = movementFactory.buildMovementSouthToNorth();
+        this.estState = movementFactory.buildMovementEastToWest();
+        this.westState = movementFactory.buildMovementWestToEast();
     }
 
     private void setNextPositionState() {
