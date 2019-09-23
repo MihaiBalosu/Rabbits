@@ -23,9 +23,15 @@ public class Fox implements EnemyRole, Serializable {
     }
 
     @Override
-    public void kill(PlayerRole player) {
-        field.endGameFor(player);
-        switchPositionState();
+    public void attack(PlayerRole player) {
+        if (player.isInvincible()) {
+            field.endGameFor(this);
+            player.decreaseInvincibility();
+        } else {
+            field.endGameFor(player);
+            player.changeStatus();
+            switchPositionState();
+        }
     }
 
     @Override
@@ -50,7 +56,7 @@ public class Fox implements EnemyRole, Serializable {
     @Override
     public void turn(List<PlayerRole> copyList) {
         positionState.move();
-        for(PlayerRole player : copyList){
+        for (PlayerRole player : copyList) {
             searchFor(player);
         }
 

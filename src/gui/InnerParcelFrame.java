@@ -30,7 +30,7 @@ public class InnerParcelFrame extends JButton implements ParcelFrameRole, Parcel
     @Override
     public void addEggInGUI(int value) {
         setBackground(Color.PINK);
-        setText("E" + String.valueOf(value));
+        setText("E" + value);
     }
 
     @Override
@@ -75,21 +75,32 @@ public class InnerParcelFrame extends JButton implements ParcelFrameRole, Parcel
     @Override
     public void addLifesInGUI(int value) {
         setBackground(Color.RED);
-        setText("H" + String.valueOf(value));
+        setText("H" + value);
     }
 
     @Override
     public void addTrapInGUI(int value) {
         setBackground(Color.BLUE);
-        setText("T" + String.valueOf(value));
+        setText("T" + value);
 
     }
 
     @Override
     public void addRandomPrizeInGUI(int randomValue) {
-        setBackground(Color.ORANGE);
-        setText("RP" + String.valueOf(randomValue));
+        setBackground(Color.GREEN);
+        setText("RP" + randomValue);
 
+    }
+
+    @Override
+    public void setEnable(boolean b) {
+        setEnabled(b);
+    }
+
+    @Override
+    public void addCarrotInGUI() {
+        setBackground(Color.ORANGE);
+        setText("C");
     }
 
 

@@ -10,7 +10,7 @@ public interface ParcelRole {
 
     PrizeStateRole getPrizeState();
 
-    void visitPlayerWithHealth(RabbitWithHealth rabbitWithHealth);
+    void visitPlayerWithLifes(RabbitWithHealth rabbitWithHealth);
 
     void visitedByEnemy(PlayerRole player, EnemyRole fox);
 }

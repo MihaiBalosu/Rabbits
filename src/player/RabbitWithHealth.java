@@ -16,12 +16,14 @@ public class RabbitWithHealth implements PlayerRole, Serializable {
     private Color randomColor;
     private String status;
     private int playerIndex;
+    private InvincibilityRole invincibility;
 
     public RabbitWithHealth(FieldRole otherField, PositionStateRole otherPositionState, LifeRole otherLife, int otherPlayerIndex) {
         this.field = otherField;
         this.positionState = otherPositionState;
         this.playerIndex = otherPlayerIndex;
         this.life = otherLife;
+        this.invincibility = new Invincibility(0);
         score = new Points(0);
         status = "Alive";
 
@@ -35,7 +37,7 @@ public class RabbitWithHealth implements PlayerRole, Serializable {
     @Override
     public void turn() {
         positionState.move();
-        field.visitByPlayerWithHealth(positionState, this);
+        field.visitByPlayerWithLifes(positionState, this);
 
     }
 
@@ -138,6 +140,21 @@ public class RabbitWithHealth implements PlayerRole, Serializable {
 
     public void setLifes(int i) {
         life.setLife(i);
+    }
+
+    @Override
+    public void increaseInvincibility(int value) {
+        invincibility.increase(value);
+    }
+
+    @Override
+    public boolean isInvincible() {
+        return invincibility.isPositive();
+    }
+
+    @Override
+    public void decreaseInvincibility() {
+        invincibility.decrease();
     }
 
 }

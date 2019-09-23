@@ -9,5 +9,7 @@ public interface ParcelFrameRole {
 
     void addPlayer(Color color, int index);
 
+    void setEnable(boolean b);
+
 
 }

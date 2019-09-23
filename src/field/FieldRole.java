@@ -15,7 +15,7 @@ public interface FieldRole {
 
     void movePlayers();
 
-    void visitByPlayerWithHealth(PositionRole positionState, PlayerRole player);
+    void visitBy(PositionRole positionState, PlayerRole player);
 
     void endGameFor(PlayerRole player);
 
@@ -23,7 +23,7 @@ public interface FieldRole {
 
     void setParcels(ParcelRole[][] parcels);
 
-    void visitByPlayerWithHealth(PositionStateRole positionState, RabbitWithHealth rabbitWithHealth);
+    void visitByPlayerWithLifes(PositionStateRole positionState, RabbitWithHealth rabbitWithHealth);
 
     List<PlayerRole> getPlayersOnField();
 

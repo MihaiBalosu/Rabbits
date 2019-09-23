@@ -1,6 +1,8 @@
 package position;
 
-public class MovementStateFactory implements MovementStateFactoryRole {
+import java.io.Serializable;
+
+public class MovementStateFactory implements MovementStateFactoryRole, Serializable {
     private DynamicPositionRole position;
 
     public MovementStateFactory(DynamicPositionRole otherPosition) {

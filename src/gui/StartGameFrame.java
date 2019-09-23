@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -32,6 +31,10 @@ public class StartGameFrame extends JFrame implements Serializable {
 
         Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
+        JLabel insertDimension = new JLabel("Insert field Dimensions");
+        insertDimension.setBounds(200, 10, 170, 30);
+        panel.add(insertDimension);
+        
         JLabel setNoOfRows = new JLabel("Enter number of rows:");
         setNoOfRows.setBounds(80, 70, 170, 30);
         panel.add(setNoOfRows);
@@ -81,8 +84,9 @@ public class StartGameFrame extends JFrame implements Serializable {
                     int columns = Integer.parseInt(noOfColumns.getText());
                     int rows = Integer.parseInt(noOfRows.getText());
                     controller.createParcels(rows, columns);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Insert field dimensions to start game");
+                    setVisible(true);
                 }
             }
         });
@@ -95,15 +99,19 @@ public class StartGameFrame extends JFrame implements Serializable {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                FieldFrameBuilder gameFrame;
                 try {
-                    FieldFrameBuilder gameFrame = load.load();
+                    gameFrame = load.load();
                     gameFrame.setVisible(true);
                     setVisible(false);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    JOptionPane.showMessageDialog(null, "Class not found");
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "No game is saved");
                 }
+
+
             }
         });
         panel.add(loadButton);

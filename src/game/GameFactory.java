@@ -33,10 +33,12 @@ public class GameFactory implements GameFactoryRole, Serializable {
     private List<ParcelWithLifes> parcelsWithLifes;
     private List<ParcelWithTrap> parcelsWithTrap;
     private List<EnemyRole> enemies;
+    private List<ParcelWithCarrot> parcelsWithCarrot;
 
     public GameFactory(OutputRole otherOutput) {
         this.output = otherOutput;
         playerIndex = 1;
+        parcelsWithCarrot = new ArrayList<>();
         parcelsWithEgg = new ArrayList<>();
         parcelsWithTrap = new ArrayList<>();
         parcelsWithLifes = new ArrayList<>();
@@ -93,12 +95,10 @@ public class GameFactory implements GameFactoryRole, Serializable {
 
     @Override
     public Game createGame() {
-
         FieldFactoryRole fieldFactory = new FieldFactory(output);
         field = fieldFactory.build();
         Game game = new Game(field, output);
         return game;
-
     }
 
     @Override
@@ -158,6 +158,13 @@ public class GameFactory implements GameFactoryRole, Serializable {
         PrizeStateRole randomPrize = createRandomPrize(randomValue, x, y);
         ((InnerParcel) parcels[x][y]).setPrizeState(randomPrize);
         parcelsWithRandomPrize.add(randomPrize);
+    }
+
+    @Override
+    public void addCarrot(int x, int y) {
+        ParcelWithCarrot parcelWithCarrot = new ParcelWithCarrot(parcels[x][y].getPrizeState(), x, y, this);
+        parcelsWithCarrot.add(parcelWithCarrot);
+        ((InnerParcel) parcels[x][y]).setPrizeState(parcelWithCarrot);
     }
 
     @Override
@@ -244,6 +251,16 @@ public class GameFactory implements GameFactoryRole, Serializable {
     @Override
     public List<EnemyRole> getEnemies() {
         return field.getEnemies();
+    }
+
+    @Override
+    public void removeParcelWithCarrot(ParcelWithCarrot parcelWithCarrot) {
+        parcelsWithCarrot.remove(parcelWithCarrot);
+    }
+
+    @Override
+    public List<ParcelWithCarrot> getParcelsWithCarrot() {
+        return parcelsWithCarrot;
     }
 
 }

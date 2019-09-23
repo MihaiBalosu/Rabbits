@@ -17,4 +17,9 @@ public class OutsideParcelFrame extends JButton implements ParcelFrameRole, Seri
 
     }
 
+    @Override
+    public void setEnable(boolean b) {
+        setEnabled(b);
+    }
+
 }

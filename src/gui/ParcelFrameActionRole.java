@@ -23,4 +23,6 @@ public interface ParcelFrameActionRole {
     void addTrapInGUI(int value);
 
     void addRandomPrizeInGUI(int randomValue);
+
+    void addCarrotInGUI();
 }

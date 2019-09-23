@@ -5,6 +5,7 @@ import save_load.SaveLoad;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.Serializable;
 
 public class SaveButton extends JButton implements ActionListener, Serializable {
@@ -21,7 +22,11 @@ public class SaveButton extends JButton implements ActionListener, Serializable 
     @Override
     public void actionPerformed(ActionEvent e) {
         SaveLoad save = new SaveLoad();
-        save.save(gameView);
+        try {
+            save.save(gameView);
+        } catch (IOException e1) {
+            JOptionPane.showMessageDialog(null, "Location where the game should be saved doesn't exist");
+        }
     }
 
 }

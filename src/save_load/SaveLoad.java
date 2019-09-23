@@ -6,16 +6,12 @@ import java.io.*;
 
 public class SaveLoad implements Serializable {
 
-    public void save(Object e) {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("E:\\eclipse-workspace\\RabbitsGUI3\\save.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(e);
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
+    public void save(Object e) throws IOException {
+        FileOutputStream fileOut = new FileOutputStream("E:\\eclipse-workspace\\RabbitsGUI3\\save.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(e);
+        out.close();
+        fileOut.close();
     }
 
     public FieldFrameBuilder load() throws IOException, ClassNotFoundException {

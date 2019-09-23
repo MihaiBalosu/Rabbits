@@ -25,11 +25,13 @@ public class RandomPrizeButton extends JButton implements ActionListener, Serial
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
                 ((InnerParcelFrame) cell[x][y]).removeActionActionListener();
+                cell[x][y].setEnable(false);
             }
         }
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
                 ((InnerParcelFrame) cell[x][y]).addActionActionListener();
+                cell[x][y].setEnable(true);
                 ((InnerParcelFrame) cell[x][y]).setItemType(itemType);
             }
         }

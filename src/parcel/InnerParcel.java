@@ -32,7 +32,7 @@ public class InnerParcel implements ParcelRole, Serializable {
     }
 
     @Override
-    public void visitPlayerWithHealth(RabbitWithHealth rabbitWithHealth) {
+    public void visitPlayerWithLifes(RabbitWithHealth rabbitWithHealth) {
         prizeState.visitedByPlayerWithHealth(rabbitWithHealth);
         prizeState = prizeState.getPrizeState();
     }
@@ -40,8 +40,7 @@ public class InnerParcel implements ParcelRole, Serializable {
     @Override
     public void visitedByEnemy(PlayerRole player, EnemyRole fox) {
         if (fox.hasSamePositionAs(player)) {
-            fox.kill(player);
-            player.changeStatus();
+            fox.attack(player);
         }
     }
 

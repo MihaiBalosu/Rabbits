@@ -45,6 +45,7 @@ public class FieldFrameBuilder extends JFrame implements FieldFrameBuilderRole, 
                     ((InnerParcelFrame) cell[m][n]).setController(controller);
                 }
                 cell[m][n].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                cell[m][n].setEnable(false);
                 panel.add((Component) cell[m][n]);
                 add(panel);
             }
@@ -159,5 +160,10 @@ public class FieldFrameBuilder extends JFrame implements FieldFrameBuilderRole, 
             }
             playersInfoTable.fireTableDataChanged();
         }
+    }
+
+    public void addCarrotInGUI(int x, int y) {
+        ((InnerParcelFrame) cell[x][y]).addCarrotInGUI();
+        setVisible(true);
     }
 }

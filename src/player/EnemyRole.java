@@ -6,7 +6,7 @@ public interface EnemyRole {
 
     boolean hasSamePositionAs(PlayerRole player);
 
-    void kill(PlayerRole player);
+    void attack(PlayerRole player);
 
     int getX();
 

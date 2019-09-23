@@ -2,18 +2,14 @@ package game;
 
 import player.EnemyRole;
 import player.PlayerRole;
-import prize.ParcelWithEgg;
-import prize.ParcelWithLifes;
-import prize.ParcelWithTrap;
-import prize.PrizeStateRole;
+import prize.*;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface GameFactoryRole {
 
-    GameRole createGame() throws FileNotFoundException;
+    GameRole createGame();
 
     void createField(int length, int columns);
 
@@ -58,4 +54,10 @@ public interface GameFactoryRole {
     List<PrizeStateRole> getParcelsWithRandomPrize();
 
     void removeParcelWithRandomPrize(PrizeStateRole parcel);
+
+    void addCarrot(int x, int y);
+
+    void removeParcelWithCarrot(ParcelWithCarrot parcelWithCarrot);
+
+    List<ParcelWithCarrot> getParcelsWithCarrot();
 }

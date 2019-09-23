@@ -47,6 +47,16 @@ public class ChoosePrizeFrame extends JFrame implements Serializable {
         randomPrizeButton.setHorizontalAlignment(JTextField.CENTER);
         panel.add(randomPrizeButton);
 
+        JLabel carrotPrize = new JLabel("Carrot");
+        carrotPrize.setBounds(80, 250, 200, 30);
+        panel.add(carrotPrize);
+
+        CarrotButton carrotPrizeButton = new CarrotButton("Carrot", cell, rows, columns);
+        carrotPrizeButton.setBounds(230, 250, 150, 30);
+        carrotPrizeButton.setHorizontalAlignment(JTextField.CENTER);
+        panel.add(carrotPrizeButton);
+        
+
         add(panel);
         setVisible(true);
     }

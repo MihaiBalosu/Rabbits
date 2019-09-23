@@ -32,7 +32,7 @@ public class OutsideParcel implements ParcelRole, Serializable {
     }
 
     @Override
-    public void visitPlayerWithHealth(RabbitWithHealth rabbitWithHealth) {
+    public void visitPlayerWithLifes(RabbitWithHealth rabbitWithHealth) {
         rabbitWithHealth.decreaseLife();
         if (rabbitWithHealth.isDead()) {
             field.endGameFor(rabbitWithHealth);

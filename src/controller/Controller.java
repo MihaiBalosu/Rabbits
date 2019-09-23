@@ -9,13 +9,9 @@ import io.Output;
 import io.OutputRole;
 import player.EnemyRole;
 import player.PlayerRole;
-import prize.ParcelWithEgg;
-import prize.ParcelWithLifes;
-import prize.ParcelWithTrap;
-import prize.PrizeStateRole;
+import prize.*;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +27,7 @@ public class Controller implements Serializable {
         this.gameFactory = otherGameFactory;
     }
 
-    public void createFieldFrame() throws FileNotFoundException {
+    public void createFieldFrame() {
         game = (Game) gameFactory.createGame();
         fieldFrame = new FieldFrameBuilder(game);
         fieldFrame.setController(this);
@@ -82,12 +78,24 @@ public class Controller implements Serializable {
     public void playTurn() {
         clearAllParcels();
         game.play();
+        updatePrizesInGUI();
+        updatePlayersInGUI();
+        updateEnemiesInGUI();
+    }
+
+    private void updatePrizesInGUI() {
         updateParcelsWithEggsInGUI();
         updateParcelsWithLifesInGUI();
         updateParcelsWithTrapsInGUI();
         updateParcelsWithRandomPrizes();
-        updatePlayersInGUI();
-        updateEnemiesInGUI();
+        updateParcelsWithCarrot();
+    }
+
+    private void updateParcelsWithCarrot() {
+        List<ParcelWithCarrot> parcelsWithCarrot = gameFactory.getParcelsWithCarrot();
+        for (ParcelWithCarrot parcelWithCarrot : parcelsWithCarrot) {
+            fieldFrame.addCarrotInGUI(parcelWithCarrot.getX(), parcelWithCarrot.getY());
+        }
     }
 
     private void clearAllParcels() {
@@ -179,5 +187,10 @@ public class Controller implements Serializable {
             StartGameFrame window = new StartGameFrame(controller);
             window.setVisible(true);
         });
+    }
+
+    public void addCarrot(int x, int y) {
+        gameFactory.addCarrot(x, y);
+        fieldFrame.addCarrotInGUI(x, y);
     }
 }

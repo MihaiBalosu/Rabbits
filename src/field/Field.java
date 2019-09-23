@@ -38,7 +38,7 @@ public class Field implements FieldRole, Serializable {
     }
 
     @Override
-    public void visitByPlayerWithHealth(PositionRole positionState, PlayerRole player) {
+    public void visitBy(PositionRole positionState, PlayerRole player) {
         ParcelRole parcel = parcels[positionState.getX()][positionState.getY()];
         parcel.visitedBy(player);
     }
@@ -65,9 +65,9 @@ public class Field implements FieldRole, Serializable {
     }
 
     @Override
-    public void visitByPlayerWithHealth(PositionStateRole positionState, RabbitWithHealth rabbitWithHealth) {
+    public void visitByPlayerWithLifes(PositionStateRole positionState, RabbitWithHealth rabbitWithHealth) {
         ParcelRole parcel = parcels[positionState.getX()][positionState.getY()];
-        parcel.visitPlayerWithHealth(rabbitWithHealth);
+        parcel.visitPlayerWithLifes(rabbitWithHealth);
     }
 
     @Override

@@ -31,4 +31,10 @@ public interface PlayerRole {
 
     int getHealthPoints();
 
+    void increaseInvincibility(int value);
+
+    boolean isInvincible();
+
+    void decreaseInvincibility();
+
 }

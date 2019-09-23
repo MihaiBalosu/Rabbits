@@ -26,15 +26,20 @@ public class RabbitWithHealthButton extends JButton implements Serializable, Act
         for (int x = 2; x < rows; x++) {
             for (int y = 2; y < columns; y++) {
                 ((InnerParcelFrame) cell[x][y]).removeActionActionListener();
+                cell[x][columns].setEnable(false);
             }
         }
         for (int x = 1; x <= rows; x++) {
             ((InnerParcelFrame) cell[x][1]).setItemType(itemType);
             ((InnerParcelFrame) cell[x][columns]).setItemType(itemType);
+            cell[x][1].setEnable(true);
+            cell[x][columns].setEnable(true);
         }
         for (int x = 1; x <= columns; x++) {
             ((InnerParcelFrame) cell[1][x]).setItemType(itemType);
             ((InnerParcelFrame) cell[rows][x]).setItemType(itemType);
+            cell[1][x].setEnable(true);
+            cell[rows][x].setEnable(true);
         }
     }
 }
